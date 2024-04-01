@@ -9,7 +9,7 @@ if (isset($_POST['logout'])){
 }
 
 if (isset($_POST['delete'])){
-    if($_POST['delete'] == 1){
+    if($_POST['delete'] == 'flag'){
         $flag = 'Websec{W3l1_D0n3_Y0u_D1d_It}';
     }
     else {
@@ -95,6 +95,7 @@ function news(string $__user_id)
 
     $query = 'SELECT * FROM NEWS';
 
+
     $result = $db->query($query);
     
     while ($row1 = $result->fetchArray()) {
@@ -109,8 +110,9 @@ function news(string $__user_id)
                         <form method="post" action = "index.php">
                             <a href="#" class="btn btn-primary">Go somewhere</a>';
         if($__user_id == $row1['author_id']) {
+                    $value = ($row1['id'] != 1) ? $row1['id'] : 'flag';
                     $news .= '
-                            <button class="btn btn-outline-danger" name=delete value = "'.$row1['id'].'">delete newsletter</button>
+                            <button class="btn btn-outline-danger" name=delete value = "'.$value.'">delete newsletter</button>
                         </form>';       
         }
         $news .='
@@ -130,8 +132,9 @@ function news(string $__user_id)
                     <form method="post" action = "index.php">
                         <a href="#" class="btn btn-primary">Go somewhere</a>';
         if($__user_id == $row2['author_id']) {
+            $value2 = ($row2['id'] != 1) ? $row2['id'] : 'flag';
             $news .= '
-                        <button class="btn btn-outline-danger" name=delete value="'.$row2['id'].'">delete newsletter</button>
+                        <button class="btn btn-outline-danger" name=delete value="'.$value2.'">delete newsletter</button>
                     </form>';       
         }
         $news .='
